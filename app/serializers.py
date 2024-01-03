@@ -1,9 +1,9 @@
 from rest_framework import serializers
 from .models import Address, Product, Cart, CartItem, Review, Like, DisLike
-from users.serializers import UserProfileSerializer
+# from users.serializers import UserProfileSerializer
 
 class AddressSerializer(serializers.ModelSerializer):
-    user = UserProfileSerializer()
+    # user = UserProfileSerializer()
 
     class Meta:
         model = Address

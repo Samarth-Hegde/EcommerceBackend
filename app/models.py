@@ -1,7 +1,7 @@
 from django.db import models
 
 from django.core.validators import MinValueValidator, MaxValueValidator
-from users.models import UserProfile
+from users.models import User
 
 class Address(models.Model):
     id = models.AutoField(primary_key=True)
@@ -9,7 +9,7 @@ class Address(models.Model):
     last_name = models.CharField(max_length=30,blank=False,null=False)
     email = models.EmailField(max_length=254,blank=False,null=False)
     phone = models.CharField(max_length=10,blank=False,null=False)
-    user = models.ForeignKey(UserProfile,on_delete=models.CASCADE,related_name='address')
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='address')
     address_line_1 = models.CharField(max_length=100,blank=False,null=False)
     address_line_2 = models.CharField(max_length=100)
     city = models.CharField(max_length=50,blank=False,null=False)
@@ -26,7 +26,7 @@ class Product(models.Model):
 
 class Cart(models.Model):
     id = models.AutoField(primary_key=True)
-    user = models.OneToOneField(UserProfile, on_delete=models.CASCADE, related_name='cart')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cart')
 
 
 class CartItem(models.Model):
@@ -37,14 +37,14 @@ class CartItem(models.Model):
 
 class Review(models.Model):
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(UserProfile,on_delete=models.CASCADE,related_name='review')
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='review')
     rating = models.PositiveSmallIntegerField(blank=False,null=False)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
 class Like(models.Model):
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(UserProfile,on_delete=models.CASCADE,related_name='like')
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='like')
     review_id = models.ForeignKey(Review,on_delete=models.CASCADE,related_name='like_review')
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -55,7 +55,7 @@ class Like(models.Model):
 
 class DisLike(models.Model):
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(UserProfile,on_delete=models.CASCADE,related_name='dislike')
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='dislike')
     review_id = models.ForeignKey(Review,on_delete=models.CASCADE,related_name='dislike_review')
     created_at = models.DateTimeField(auto_now_add=True)
 

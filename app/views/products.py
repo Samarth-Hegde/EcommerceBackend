@@ -78,12 +78,6 @@ def filter_product(request,q):
     except Exception as e:
         return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-def add_to_cart(request):
-    pass
-
-def clear_cart(request):
-    pass
-
 def place_order(request):
     pass
 
